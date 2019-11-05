@@ -7,23 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F6016C9F236BA6C600E1E53A /* RaveLedMatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6016C9E236BA6C600E1E53A /* RaveLedMatrixView.swift */; };
+		F6016CA1236BA6E800E1E53A /* RaveLedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6016CA0236BA6E800E1E53A /* RaveLedController.swift */; };
 		F66E38DE23566BCF0012350B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66E38DD23566BCF0012350B /* AppDelegate.swift */; };
 		F66E38E023566BCF0012350B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66E38DF23566BCF0012350B /* SceneDelegate.swift */; };
-		F66E38E223566BCF0012350B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66E38E123566BCF0012350B /* ContentView.swift */; };
+		F66E38E223566BCF0012350B /* BluetoothPairingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66E38E123566BCF0012350B /* BluetoothPairingView.swift */; };
 		F66E38E423566BCF0012350B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F66E38E323566BCF0012350B /* Assets.xcassets */; };
 		F66E38E723566BCF0012350B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F66E38E623566BCF0012350B /* Preview Assets.xcassets */; };
 		F66E38EA23566BCF0012350B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F66E38E823566BCF0012350B /* LaunchScreen.storyboard */; };
+		F66E38F2235673870012350B /* BluetoothController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66E38F1235673870012350B /* BluetoothController.swift */; };
+		F6CD4B0F23614343008C6138 /* WholesomeTextsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD4B0E23614343008C6138 /* WholesomeTextsView.swift */; };
+		F6CD4B112361453F008C6138 /* VisualTripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6CD4B102361453F008C6138 /* VisualTripsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F6016C9E236BA6C600E1E53A /* RaveLedMatrixView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaveLedMatrixView.swift; sourceTree = "<group>"; };
+		F6016CA0236BA6E800E1E53A /* RaveLedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaveLedController.swift; sourceTree = "<group>"; };
 		F66E38DA23566BCF0012350B /* RaveLedMatrix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaveLedMatrix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F66E38DD23566BCF0012350B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F66E38DF23566BCF0012350B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F66E38E123566BCF0012350B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F66E38E123566BCF0012350B /* BluetoothPairingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothPairingView.swift; sourceTree = "<group>"; };
 		F66E38E323566BCF0012350B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F66E38E623566BCF0012350B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F66E38E923566BCF0012350B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F66E38EB23566BCF0012350B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F66E38F1235673870012350B /* BluetoothController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothController.swift; sourceTree = "<group>"; };
+		F6CD4B0E23614343008C6138 /* WholesomeTextsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WholesomeTextsView.swift; sourceTree = "<group>"; };
+		F6CD4B102361453F008C6138 /* VisualTripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualTripsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F64E288A236B0290008ABA2D /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				F6016CA0236BA6E800E1E53A /* RaveLedController.swift */,
+				F66E38F1235673870012350B /* BluetoothController.swift */,
+			);
+			path = BLE;
+			sourceTree = "<group>";
+		};
 		F66E38D123566BCF0012350B = {
 			isa = PBXGroup;
 			children = (
@@ -56,9 +75,10 @@
 		F66E38DC23566BCF0012350B /* RaveLedMatrix */ = {
 			isa = PBXGroup;
 			children = (
+				F64E288A236B0290008ABA2D /* BLE */,
+				F6CD4B0D23614312008C6138 /* Views */,
 				F66E38DD23566BCF0012350B /* AppDelegate.swift */,
 				F66E38DF23566BCF0012350B /* SceneDelegate.swift */,
-				F66E38E123566BCF0012350B /* ContentView.swift */,
 				F66E38E323566BCF0012350B /* Assets.xcassets */,
 				F66E38E823566BCF0012350B /* LaunchScreen.storyboard */,
 				F66E38EB23566BCF0012350B /* Info.plist */,
@@ -73,6 +93,17 @@
 				F66E38E623566BCF0012350B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F6CD4B0D23614312008C6138 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F6016C9E236BA6C600E1E53A /* RaveLedMatrixView.swift */,
+				F6CD4B0E23614343008C6138 /* WholesomeTextsView.swift */,
+				F6CD4B102361453F008C6138 /* VisualTripsView.swift */,
+				F66E38E123566BCF0012350B /* BluetoothPairingView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,8 +178,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F66E38DE23566BCF0012350B /* AppDelegate.swift in Sources */,
+				F6016CA1236BA6E800E1E53A /* RaveLedController.swift in Sources */,
 				F66E38E023566BCF0012350B /* SceneDelegate.swift in Sources */,
-				F66E38E223566BCF0012350B /* ContentView.swift in Sources */,
+				F6CD4B112361453F008C6138 /* VisualTripsView.swift in Sources */,
+				F6CD4B0F23614343008C6138 /* WholesomeTextsView.swift in Sources */,
+				F66E38F2235673870012350B /* BluetoothController.swift in Sources */,
+				F6016C9F236BA6C600E1E53A /* RaveLedMatrixView.swift in Sources */,
+				F66E38E223566BCF0012350B /* BluetoothPairingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +332,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.RaveLedMatrix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -316,7 +352,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.RaveLedMatrix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
