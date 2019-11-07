@@ -16,7 +16,7 @@ struct VisualTripsView: View {
         guard let index = raveLedController.visuals.firstIndex(of: label) else {
             return false
         }
-        return index == raveLedController.activeVisual
+        return index == raveLedController.activeVisualIndex
     }
     
     private func activateVisualTrip(_ label: String) {
@@ -35,26 +35,47 @@ struct VisualTripsView: View {
                     HStack {
                         Text(label)
                         Spacer()
-                        Button(action: {
-                            self.activateVisualTrip(label)
-                        }, label: {
-                            self.isActiveRow(label) ?
-                                Text("Running") : Text("Activate")
-                        })
+                        Text(self.isActiveRow(label) ? "Running" : "")
                         .disabled(!self.raveLedController.paired || self.isActiveRow(label))
                         .foregroundColor(self.isActiveRow(label) ? .green : (self.raveLedController.paired ? .blue : .gray))
                     }
+                    .frame(height: 40)
+                    .onTapGesture {
+                        self.activateVisualTrip(label)
+                    }
                 }
-            }
-            .padding()
-            HStack {
-                Image(systemName: "lightbulb")
-                .font(.title)
-                    .foregroundColor(raveLedController.paired ? .yellow : .gray)
+            }.offset(y: 8)
+            VStack {
+                HStack {
+                    Image(systemName: "speedometer")
+                    .font(.title)
+                    .foregroundColor(raveLedController.paired ? .red : .gray)
+                    .frame(width: 30)
+                    Slider(value: $raveLedController.speed, in: 1...200, step: 1, onEditingChanged: { sliding in
+                        if !sliding {
+                            self.raveLedController.triggerSpeedUpdate()
+                        }
+                    })
+                }
                 .padding()
-                Slider(value: $raveLedController.brightness, in: 0...100, step: 1)
                 .disabled(!raveLedController.paired)
-            }
+                HStack {
+                    Image(systemName: "lightbulb")
+                    .font(.title)
+                    .foregroundColor(raveLedController.paired ? .yellow : .gray)
+                    .frame(width: 30)
+                    Slider(value: $raveLedController.brightness, in: 1...100, step: 1, onEditingChanged: { sliding in
+                        if !sliding {
+                            self.raveLedController.triggerBrightnessUpdate()
+                        }
+                    })
+                    .disabled(!raveLedController.paired)
+                }.padding()
+            }.overlay(
+                RoundedRectangle(cornerRadius: 0)
+                    .stroke(Color.gray, lineWidth: 0.3)
+            )
         }
+        .onAppear(perform: {self.raveLedController.syncNow()})
     }
 }

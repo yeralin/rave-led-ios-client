@@ -28,14 +28,18 @@ final class RaveLedController: ObservableObject {
     @Published var pairedPeripheral: CBPeripheral = nil
     @Published var paired: Bool = false
     
+    @Published var speed: Double = 0
     @Published var brightness: Double = 0
     
     @Published var wholesomeTexts: [String] = []
-    @Published var activeText: Int = -1
-    
+    @Published var activeTextIndex: Int = -1
+    @Published var textRepeats: Double = -1
+    @Published var activeColor: RGB = RGB(r: 0,g: 0,b: 255)
+    @Published var isRefreshing: Bool = false
+    @Published var isPickingColor: Bool = false
     
     @Published var visuals: [String] = ["TwinkleFOX", "Attract","Bounce","FlowField","Incremental Drift", "PendulumWave", "Radar", "Spiral", "Wave"]
-    @Published var activeVisual = -1
+    @Published var activeVisualIndex = -1
     
     @Published var alert: AlertContainer = AlertContainer()
     
@@ -54,6 +58,32 @@ final class RaveLedController: ObservableObject {
     }
     
     func syncNow() {
+        do {
+            let payload = try serializeJson(["op": "sync"])
+            let receivedResponse: (_: [String: Any]) -> () = { payload in
+                if payload["response"] as? String == "ok" {
+                    self.brightness = payload["brightness"] as? Double ?? 1
+                    self.speed = payload["speed"] as? Double ?? 100
+                    self.textRepeats = payload["repeats"] as? Double ?? 1
+                    self.activeColor = RGB(r: payload["r"] as? Int ?? 0,
+                                           g: payload["g"] as? Int ?? 0,
+                                           b: payload["b"] as? Int ?? 255)
+                    self.activeTextIndex = payload["activeTextIndex"] as? Int ?? -1
+                    self.activeVisualIndex = payload["activePatternIndex"] as? Int ?? -1
+                } else {
+                    self.alert = AlertContainer(isInAlert: true,
+                                                alertTitle: "Unexpected activate visual response",
+                                                alertMessage: "Received \(payload["reason"] ?? "unknown")")
+                }
+            }
+            sendValue(payload, callback: receivedResponse)
+        } catch let err {
+            print(err)
+        }
+    }
+    
+    func refreshTexts() {
+        isRefreshing = true;
         DispatchQueue.global(qos: .userInitiated).async {
             var finished = false
             for (i, text) in self.wholesomeTexts.enumerated() {
@@ -70,6 +100,9 @@ final class RaveLedController: ObservableObject {
                 }
                 finished = false
             }
+            DispatchQueue.main.sync {
+                self.isRefreshing = false
+            }
         }
     }
     
@@ -84,10 +117,11 @@ final class RaveLedController: ObservableObject {
                 receivedResponse = { payload in
                     if payload["response"] as? String == "inserted" {
                         self.wholesomeTexts.append(text)
+                        UserDefaults.standard.set(self.wholesomeTexts, forKey: "wholesomeTexts")
                     } else {
                         self.alert = AlertContainer(isInAlert: true,
                                                    alertTitle: "Unexpected \(String(describing: action)) response",
-                                                   alertMessage: "Received \(payload["response"] ?? "unknown")")
+                                                   alertMessage: "Received \(payload["reason"] ?? "unknown")")
                     }
                 }
             case .activate:
@@ -97,11 +131,12 @@ final class RaveLedController: ObservableObject {
                 payload["index"] = i
                 receivedResponse = { payload in
                     if payload["response"] as? String == "activated" {
-                        self.activeText = i
+                        self.activeTextIndex = i
+                        self.activeVisualIndex = -1
                     } else {
                         self.alert = AlertContainer(isInAlert: true,
                                                     alertTitle: "Unexpected \(String(describing: action)) response",
-                                                    alertMessage: "Received \(payload["response"] ?? "unknown")")
+                                                    alertMessage: "Received \(payload["reason"] ?? "unknown")")
                     }
                 }
             case .delete:
@@ -115,7 +150,16 @@ final class RaveLedController: ObservableObject {
                     } else {
                         self.alert = AlertContainer(isInAlert: true,
                                                     alertTitle: "Unexpected \(String(describing: action)) response",
-                                                    alertMessage: "Received \(payload["response"] ?? "unknown")")
+                                                    alertMessage: "Received \(payload["reason"] ?? "unknown")")
+                    }
+                }
+            case .repeats:
+                payload["repeats"] = self.textRepeats
+                receivedResponse = { payload in
+                    if payload["response"] as? String != "updated" {
+                        self.alert = AlertContainer(isInAlert: true,
+                                                    alertTitle: "Unexpected \(String(describing: action)) response",
+                                                    alertMessage: "Received \(payload["reason"] ?? "unknown")")
                     }
                 }
             }
@@ -130,12 +174,12 @@ final class RaveLedController: ObservableObject {
             let payload = try serializeJson(["op": "visual", "index": index])
             let receivedResponse: (_: [String: Any]) -> () = { payload in
                 if payload["response"] as? String == "activated" {
-                    self.activeVisual = index
+                    self.activeVisualIndex = index
+                    self.activeTextIndex = -1
                 } else {
                     self.alert = AlertContainer(isInAlert: true,
                                                 alertTitle: "Unexpected activate visual response",
-                                                alertMessage: "Received \(payload["response"] ?? "unknown")")
-
+                                                alertMessage: "Received \(payload["reason"] ?? "unknown")")
                 }
             }
             sendValue(payload, callback: receivedResponse)
@@ -148,7 +192,62 @@ final class RaveLedController: ObservableObject {
         do {
             let payload = try serializeJson(["op": "brightness", "val": brightness])
             let receivedResponse: (_ payload: [String: Any]) -> () = { payload in
-                
+                if payload["response"] as? String != "updated" {
+                    self.alert = AlertContainer(isInAlert: true,
+                                                alertTitle: "Unexpected brightness update response",
+                                                alertMessage: "Received \(payload["reason"] ?? "unknown")")
+                }
+            }
+            sendValue(payload, callback: receivedResponse)
+        } catch let err {
+            print(err)
+        }
+    }
+    
+    func triggerSpeedUpdate() {
+        do {
+            let payload = try serializeJson(["op": "speed", "val": speed])
+            let receivedResponse: (_ payload: [String: Any]) -> () = { payload in
+                if payload["response"] as? String != "updated" {
+                    self.alert = AlertContainer(isInAlert: true,
+                                                alertTitle: "Unexpected speed update response",
+                                                alertMessage: "Received \(payload["reason"] ?? "unknown")")
+                }
+            }
+            sendValue(payload, callback: receivedResponse)
+        } catch let err {
+            print(err)
+        }
+    }
+    
+    func triggerRepeatsUpdate() {
+        do {
+            let payload = try serializeJson(["op": "repeats", "val": textRepeats])
+            let receivedResponse: (_ payload: [String: Any]) -> () = { payload in
+                if payload["response"] as? String != "updated" {
+                    self.alert = AlertContainer(isInAlert: true,
+                                                alertTitle: "Unexpected speed update response",
+                                                alertMessage: "Received \(payload["reason"] ?? "unknown")")
+                }
+            }
+            sendValue(payload, callback: receivedResponse)
+        } catch let err {
+            print(err)
+        }
+    }
+    
+    
+    func triggerColorUpdate() {
+        do {
+            let rgb = self.activeColor
+            let payload = try serializeJson(["op": "color", "r": rgb.r, "g": rgb.g, "b": rgb.b])
+            let receivedResponse: (_ payload: [String: Any]) -> () = { payload in
+                if payload["response"] as? String != "updated" {
+                    self.alert = AlertContainer(isInAlert: true,
+                                                alertTitle: "Unexpected color update response",
+                                                alertMessage: "Received \(payload["reason"] ?? "unknown")")
+
+                }
             }
             sendValue(payload, callback: receivedResponse)
         } catch let err {

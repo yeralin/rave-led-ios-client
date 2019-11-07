@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F6016C9F236BA6C600E1E53A /* RaveLedMatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6016C9E236BA6C600E1E53A /* RaveLedMatrixView.swift */; };
 		F6016CA1236BA6E800E1E53A /* RaveLedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6016CA0236BA6E800E1E53A /* RaveLedController.swift */; };
+		F6231F422372742800E68588 /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6231F412372742800E68588 /* ColorPicker.swift */; };
 		F66E38DE23566BCF0012350B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66E38DD23566BCF0012350B /* AppDelegate.swift */; };
 		F66E38E023566BCF0012350B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66E38DF23566BCF0012350B /* SceneDelegate.swift */; };
 		F66E38E223566BCF0012350B /* BluetoothPairingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66E38E123566BCF0012350B /* BluetoothPairingView.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		F6016C9E236BA6C600E1E53A /* RaveLedMatrixView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaveLedMatrixView.swift; sourceTree = "<group>"; };
 		F6016CA0236BA6E800E1E53A /* RaveLedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaveLedController.swift; sourceTree = "<group>"; };
+		F6231F412372742800E68588 /* ColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		F66E38DA23566BCF0012350B /* RaveLedMatrix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaveLedMatrix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F66E38DD23566BCF0012350B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F66E38DF23566BCF0012350B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		654E9A944FC10C6F4EDD1149 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F6231F402372740100E68588 /* 3rd-party */ = {
+			isa = PBXGroup;
+			children = (
+				F6231F412372742800E68588 /* ColorPicker.swift */,
+			);
+			path = "3rd-party";
+			sourceTree = "<group>";
+		};
 		F64E288A236B0290008ABA2D /* BLE */ = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +78,7 @@
 			children = (
 				F66E38DC23566BCF0012350B /* RaveLedMatrix */,
 				F66E38DB23566BCF0012350B /* Products */,
+				654E9A944FC10C6F4EDD1149 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,6 +93,7 @@
 		F66E38DC23566BCF0012350B /* RaveLedMatrix */ = {
 			isa = PBXGroup;
 			children = (
+				F6231F402372740100E68588 /* 3rd-party */,
 				F64E288A236B0290008ABA2D /* BLE */,
 				F6CD4B0D23614312008C6138 /* Views */,
 				F66E38DD23566BCF0012350B /* AppDelegate.swift */,
@@ -182,6 +201,7 @@
 				F66E38E023566BCF0012350B /* SceneDelegate.swift in Sources */,
 				F6CD4B112361453F008C6138 /* VisualTripsView.swift in Sources */,
 				F6CD4B0F23614343008C6138 /* WholesomeTextsView.swift in Sources */,
+				F6231F422372742800E68588 /* ColorPicker.swift in Sources */,
 				F66E38F2235673870012350B /* BluetoothController.swift in Sources */,
 				F6016C9F236BA6C600E1E53A /* RaveLedMatrixView.swift in Sources */,
 				F66E38E223566BCF0012350B /* BluetoothPairingView.swift in Sources */,
