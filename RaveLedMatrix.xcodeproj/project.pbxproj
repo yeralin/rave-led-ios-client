@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F13EC9726B45151005B94E1 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F13EC9626B45151005B94E1 /* HomeKit.framework */; };
 		F6016C9F236BA6C600E1E53A /* RaveLedMatrixView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6016C9E236BA6C600E1E53A /* RaveLedMatrixView.swift */; };
 		F6016CA1236BA6E800E1E53A /* RaveLedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6016CA0236BA6E800E1E53A /* RaveLedController.swift */; };
 		F6231F422372742800E68588 /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6231F412372742800E68588 /* ColorPicker.swift */; };
@@ -22,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F13EC9626B45151005B94E1 /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
+		3F13EC9B26B451F2005B94E1 /* RaveLedMatrix.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RaveLedMatrix.entitlements; sourceTree = "<group>"; };
 		F6016C9E236BA6C600E1E53A /* RaveLedMatrixView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaveLedMatrixView.swift; sourceTree = "<group>"; };
 		F6016CA0236BA6E800E1E53A /* RaveLedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaveLedController.swift; sourceTree = "<group>"; };
 		F6231F412372742800E68588 /* ColorPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
@@ -43,17 +46,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F13EC9726B45151005B94E1 /* HomeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		654E9A944FC10C6F4EDD1149 /* Pods */ = {
+		3F13EC9526B45151005B94E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F13EC9626B45151005B94E1 /* HomeKit.framework */,
 			);
-			path = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F6231F402372740100E68588 /* 3rd-party */ = {
@@ -78,7 +83,7 @@
 			children = (
 				F66E38DC23566BCF0012350B /* RaveLedMatrix */,
 				F66E38DB23566BCF0012350B /* Products */,
-				654E9A944FC10C6F4EDD1149 /* Pods */,
+				3F13EC9526B45151005B94E1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,6 +107,7 @@
 				F66E38E823566BCF0012350B /* LaunchScreen.storyboard */,
 				F66E38EB23566BCF0012350B /* Info.plist */,
 				F66E38E523566BCF0012350B /* Preview Content */,
+				3F13EC9B26B451F2005B94E1 /* RaveLedMatrix.entitlements */,
 			);
 			path = RaveLedMatrix;
 			sourceTree = "<group>";
@@ -152,16 +158,17 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1110;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Daniyar Yeralin";
 				TargetAttributes = {
 					F66E38D923566BCF0012350B = {
 						CreatedOnToolsVersion = 11.1;
+						LastSwiftMigration = 1240;
 					};
 				};
 			};
 			buildConfigurationList = F66E38D523566BCF0012350B /* Build configuration list for PBXProject "RaveLedMatrix" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -248,6 +255,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -308,6 +316,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -340,17 +349,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = RaveLedMatrix/RaveLedMatrix.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"RaveLedMatrix/Preview Content\"";
-				DEVELOPMENT_TEAM = Q7W47GFKL3;
+				DEVELOPMENT_TEAM = 3R4D9RWL38;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = RaveLedMatrix/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.RaveLedMatrix;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yeralin.RaveLedMatrix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -360,17 +375,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = RaveLedMatrix/RaveLedMatrix.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"RaveLedMatrix/Preview Content\"";
-				DEVELOPMENT_TEAM = Q7W47GFKL3;
+				DEVELOPMENT_TEAM = 3R4D9RWL38;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = RaveLedMatrix/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = Daniyar.Yeralin.RaveLedMatrix;
+				PRODUCT_BUNDLE_IDENTIFIER = net.yeralin.RaveLedMatrix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

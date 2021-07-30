@@ -25,7 +25,7 @@ struct AlertContainer {
 final class RaveLedController: ObservableObject {
     
     @Published var scannedPeripherals: [CBPeripheral] = []
-    @Published var pairedPeripheral: CBPeripheral = nil
+    @Published var pairedPeripheral: CBPeripheral? = nil
     @Published var paired: Bool = false
     
     @Published var speed: Double = 0
